@@ -1896,9 +1896,10 @@
   }
 
   .etymology-close {
-    position: absolute;
+    position: sticky;
     top: 1rem;
-    right: 1rem;
+    float: right;
+    margin-bottom: -32px;
     background: var(--autumn-red);
     color: var(--paper);
     border: none;
