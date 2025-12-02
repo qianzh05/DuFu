@@ -874,6 +874,113 @@
     color: var(--ink);
   }
 
+  /* Etymology in Annotation Panel */
+  .panel-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--paper-darker), transparent);
+    margin: 1.5rem 0;
+  }
+
+  .etymology-in-panel {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .etymology-panel-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1rem;
+    color: var(--autumn-gold-light);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .etymology-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 1rem;
+  }
+
+  .etymology-list::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .etymology-list::-webkit-scrollbar-track {
+    background: rgba(245, 241, 232, 0.1);
+    border-radius: 3px;
+  }
+
+  .etymology-list::-webkit-scrollbar-thumb {
+    background: var(--autumn-gold);
+    border-radius: 3px;
+  }
+
+  .etymology-item {
+    background: rgba(245, 241, 232, 0.08);
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--autumn-gold);
+  }
+
+  .etymology-char-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .etymology-char-large {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2rem;
+    color: var(--autumn-gold);
+    font-weight: 600;
+  }
+
+  .etymology-char-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .etymology-pinyin-small {
+    font-size: 0.85rem;
+    color: var(--paper-dark);
+    font-style: italic;
+  }
+
+  .etymology-meaning-small {
+    font-size: 0.9rem;
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  .etymology-radical-inline {
+    font-size: 0.85rem;
+    color: var(--paper-darker);
+    margin-bottom: 0.5rem;
+  }
+
+  .etymology-radical-inline strong {
+    color: var(--autumn-gold-light);
+  }
+
+  .etymology-explanation-brief {
+    font-size: 0.9rem;
+    color: var(--paper-dark);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Adjust annotation panel layout when showing both */
+  .annotation-panel.visible {
+    max-height: 80vh;
+    overflow-y: auto;
+    flex-direction: column;
+  }
+
   /* Language Toggle */
   .controls {
     position: fixed;
@@ -2144,16 +2251,21 @@
   }
 
   /* Only characters WITH etymology data get interactive styles */
-  .char-container.has-etymology {
+  .char-container.has-etymology,
+  .char-clickable {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%239b2335' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='5' fill='%239b2335'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%23c9a227'/%3E%3C/svg%3E") 12 12, pointer !important;
   }
 
-  .char-container.has-etymology:hover {
+  .char-container.has-etymology:hover,
+  .char-clickable:hover {
     background: rgba(201, 162, 39, 0.15);
     transform: translateY(-2px);
+    border-radius: 4px;
+    padding: 2px;
   }
 
-  .char-container.has-etymology:active {
+  .char-container.has-etymology:active,
+  .char-clickable:active {
     transform: translateY(0) scale(0.98);
     background: rgba(201, 162, 39, 0.25);
   }

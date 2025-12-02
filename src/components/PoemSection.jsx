@@ -25,16 +25,16 @@ export const PoemSection = ({
   }, []);
 
   const handleLineClick = (lineIndex, line, event) => {
-    // see if this line has any characters with etymology info
-    const hasEtymology = line.split('').some(char => etymologyData[char]);
-    
-    if (hasEtymology) {
-      // show etymology for first character that has it
-      const charWithEtymology = line.split('').find(char => etymologyData[char]);
-      onCharClick(charWithEtymology);
-    } else if (poem.annotations[lineIndex]) {
-      // otherwise show the annotation if there is one
-      onAnnotationClick(poem.annotations[lineIndex]);
+    const annotation = poem.annotations[lineIndex];
+    const charsWithEtymology = line.split('').filter(char => etymologyData[char]);
+
+    // if this line has annotation or etymology, show combined panel
+    if (annotation || charsWithEtymology.length > 0) {
+      onAnnotationClick({
+        annotation: annotation,
+        characters: charsWithEtymology,
+        line: line
+      });
     }
   };
 

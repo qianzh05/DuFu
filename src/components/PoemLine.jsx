@@ -21,16 +21,35 @@ export const Character = ({ char, pinyin, hasEtymology, onCharClick }) => {
 };
 
 export const PoemLine = ({ line, pinyin, showPinyin, onCharClick }) => {
+  const chars = line.split('');
+  const pinyins = pinyin ? pinyin.split(' ') : [];
+
   if (!showPinyin) {
+    // Even without pinyin, allow clicking individual characters for etymology
     return (
       <span className="poem-line-plain">
-        {line}
+        {chars.map((char, i) => {
+          const hasEtymology = !!etymologyData[char];
+          const handleClick = (e) => {
+            if (hasEtymology && onCharClick) {
+              e.stopPropagation();
+              onCharClick(char);
+            }
+          };
+
+          return (
+            <span
+              key={i}
+              className={hasEtymology ? 'char-clickable' : ''}
+              onClick={handleClick}
+            >
+              {char}
+            </span>
+          );
+        })}
       </span>
     );
   }
-
-  const chars = line.split('');
-  const pinyins = pinyin.split(' ');
 
   return (
     <div className="poem-line-with-pinyin">
